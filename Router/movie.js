@@ -54,8 +54,9 @@ router.put("/:id", async (req, res) => {
 
 // delete
 router.delete("/:id", (req, res) => {
-  const id = req.params.id;
-  res.send(`Hello from delete, your id is : ${id}`);
+  let movie = movies.getMovie(new Movie(req.params.id));
+  movie = movies.deleteMovie(movie);
+  res.json(movie);
 });
 
 // add new picture

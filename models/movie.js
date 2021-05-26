@@ -1,4 +1,4 @@
-const movies = [
+let movies = [
     {id: '1588323375416', title: 'Star Wars: Episode IX - The Rise of Skywalker', picture:{}, year: 2019, director: 'J.J. Abrams'},
     {id: '1588323390624', title: 'The Irishman', picture:{}, year: 2019, director: 'Martin Scorsese'},
     {id: '1588323412643', title: 'Harry Potter and the Sorcerers Stone', picture:{}, year: 2001, director: 'Chris Columbus'}
@@ -13,6 +13,7 @@ const Movie = class {
         this.director = director;
     }
 
+    // for updating movie's data
     mergeMovie(movie) {
         movie.title ? this.title = movie.title : '';
         movie.picture ? this.picture = movie.picture : '';
@@ -20,6 +21,7 @@ const Movie = class {
         movie.director ? this.director = movie.director : '';
     }
 
+    // for adding a new movie
     parseMovie(obj) {
         obj.id ? this.id = obj.id : '';
         obj.title ? this.title = obj.title : '';
@@ -44,7 +46,7 @@ const updateMovie = (movie) => {
 
 const deleteMovie = (movie) => {
     movies = movies.filter(mov => mov.id !== movie.id);
-    return movies;
+    return movie;
 }
 
 module.exports = {
