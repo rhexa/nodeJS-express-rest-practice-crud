@@ -2,6 +2,7 @@ const express = require("express");
 const movies = require("../models/movie");
 const Movie = movies.Movie;
 const fs = require("fs");
+const { uploadPicture } = require("../models/picture");
 const router = express.Router({ mergeParams: true });
 
 // get all
@@ -19,28 +20,23 @@ router.get("/:id", (req, res) => {
 });
 
 // add new movie
-router.post("/", (req, res) => {
+router.post("/", async (req, res) => {
   const picture = req.body.picture;
   const movie = new Movie();
   movie.id = req.body.id;
-  req.body.title ? movie.title = req.body.title : '';
-  req.body.year ? movie.year = req.body.year : '';
-  req.body.director ? movie.director = req.body.director : '';
+  req.body.title ? (movie.title = req.body.title) : "";
+  req.body.year ? (movie.year = req.body.year) : "";
+  req.body.director ? (movie.director = req.body.director) : "";
 
-  try {
-    fs.copyFile(picture.path, "./public/uploads/" + picture.name, (err) => {
-      if (err) return console.log("error");
-      picture.path = req.app.get("base") + "/public/uploads/" + picture.name;
-      console.log(`uploaded : ${picture.path}`);
-
-      movie.picture = picture;
-      movies.addMovie(movie);
-
-      res.json(movie);
-    });
-  } catch (error) {
-    console.log(error);
+  if (picture) {
+    try {
+      movie.picture = await uploadPicture(picture, req);
+    } catch (error) {
+      console.log(error);
+    }
   }
+  movies.addMovie(movie);
+  res.json(movie);
 });
 
 // update
