@@ -36,16 +36,12 @@ router.post("/", async (req, res) => {
 
 // update
 router.put("/:id", async (req, res) => {
-  const picture = req.body.picture;
   const movie = movies.getMovie(new Movie(req.params.id));
+  movie.mergeMovie(req.body);
 
-  req.body.title ? (movie.title = req.body.title) : "";
-  req.body.year ? (movie.year = req.body.year) : "";
-  req.body.director ? (movie.director = req.body.director) : "";
-
-  if (picture) {
+  if (req.body.picture) {
     try {
-      movie.picture = await uploadPicture(picture, req);
+      movie.picture = await uploadPicture(req.body.picture, req);
     } catch (error) {
       console.log(error);
     }

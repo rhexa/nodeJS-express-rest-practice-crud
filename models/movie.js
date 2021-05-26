@@ -4,7 +4,7 @@ const movies = [
     {id: '1588323412643', title: 'Harry Potter and the Sorcerers Stone', picture:{}, year: 2001, director: 'Chris Columbus'}
   ];
 
-class Movie {
+const Movie = class {
     constructor(id, title='Default', picture={}, year=2020, director='Default'){
         this.id = id;
         this.title = title;
@@ -13,14 +13,14 @@ class Movie {
         this.director = director;
     }
 
-    merge(movie) {
+    mergeMovie(movie) {
         movie.title ? this.title = movie.title : '';
         movie.picture ? this.picture = movie.picture : '';
         movie.year ? this.year = movie.year : '';
         movie.director ? this.director = movie.director : '';
     }
 
-    parseMovie (obj) {
+    parseMovie(obj) {
         obj.id ? this.id = obj.id : '';
         obj.title ? this.title = obj.title : '';
         obj.picture ? this.picture = obj.picture : '';
@@ -30,7 +30,7 @@ class Movie {
 }
 
 const getMovie = (movie) => {
-    movie = movies.find(mov => mov.id === movie.id);
+    movie.parseMovie(movies.find(mov => mov.id === movie.id));
     return movie;
 }
 
@@ -49,9 +49,9 @@ const deleteMovie = (movie) => {
 
 module.exports = {
     getMovies: ()=> {return movies},
-    getMovie: getMovie,
-    addMovie: addMovie,
-    updateMovie: updateMovie,
-    deleteMovie: deleteMovie,
-    Movie: Movie
+    getMovie,
+    addMovie,
+    updateMovie,
+    deleteMovie,
+    Movie
 }
