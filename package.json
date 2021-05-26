@@ -16,5 +16,9 @@
   "bugs": {
     "url": "https://github.com/rhexa/nodeJS-express-rest-practice-crud/issues"
   },
-  "homepage": "https://github.com/rhexa/nodeJS-express-rest-practice-crud#readme"
+  "homepage": "https://github.com/rhexa/nodeJS-express-rest-practice-crud#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-fileupload": "^1.2.1"
+  }
 }
