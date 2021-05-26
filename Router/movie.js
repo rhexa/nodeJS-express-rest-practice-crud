@@ -1,7 +1,6 @@
 const express = require("express");
 const movies = require("../models/movie");
 const Movie = movies.Movie;
-const fs = require("fs");
 const { uploadPicture } = require("../models/picture");
 const router = express.Router({ mergeParams: true });
 
@@ -40,9 +39,25 @@ router.post("/", async (req, res) => {
 });
 
 // update
-router.put("/:id", (req, res) => {
-  const id = req.params.id;
-  res.send(`Hello from put, your id is : ${id}`);
+router.put("/:id", async (req, res) => {
+  const picture = req.body.picture;
+  const movie = movies.getMovie(new Movie(req.params.id));
+
+  req.body.title ? (movie.title = req.body.title) : "";
+  req.body.year ? (movie.year = req.body.year) : "";
+  req.body.director ? (movie.director = req.body.director) : "";
+
+  if (picture) {
+    try {
+      movie.picture = await uploadPicture(picture, req);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  movies.updateMovie(movie)
+  res.json(movie);
+
 });
 
 // delete
