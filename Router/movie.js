@@ -20,16 +20,12 @@ router.get("/:id", (req, res) => {
 
 // add new movie
 router.post("/", async (req, res) => {
-  const picture = req.body.picture;
   const movie = new Movie();
-  movie.id = req.body.id;
-  req.body.title ? (movie.title = req.body.title) : "";
-  req.body.year ? (movie.year = req.body.year) : "";
-  req.body.director ? (movie.director = req.body.director) : "";
+  movie.parseMovie(req.body);
 
-  if (picture) {
+  if (movie.picture) {
     try {
-      movie.picture = await uploadPicture(picture, req);
+      movie.picture = await uploadPicture(movie.picture, req);
     } catch (error) {
       console.log(error);
     }
