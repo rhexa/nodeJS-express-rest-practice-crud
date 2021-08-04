@@ -1,0 +1,24 @@
+name: github-actions-pipeline
+on: [pull_request]
+jobs:
+  build:
+    name: Lint the code
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+        with:
+          # Full git history is needed to get a proper list of changed files within `super-linter`
+          fetch-depth: 0
+          # - uses: actions/setup-node@v2
+          #   with:
+          #     node-version: '14'
+          # - run: npm install
+          # - run: npm start
+  
+      - name: Super-Linter
+        uses: github/super-linter@v4
+        # env:
+        #   VALIDATE_ALL_CODEBASE: false
+        #   DEFAULT_BRANCH: master
+        #   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
