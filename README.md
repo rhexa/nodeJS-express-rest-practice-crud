@@ -5,7 +5,7 @@ Practicing basic RESTful web service CRUD operation on nodeJS using expressJS
 - Read All Movies   = get   /api/movies
 - Read Movie by ID  = get   /api/movies/:id
 - Add Movie         = post  /api/movies
-    {
+    - {
         id,
         title,
         picture: {
@@ -16,7 +16,7 @@ Practicing basic RESTful web service CRUD operation on nodeJS using expressJS
         director
     }
 - Update Movie      = put   /api/movies/:id
-    {
+    - {
         title,
         picture: {
             name,
