@@ -7,7 +7,7 @@ jobs:
     name: Lint the code
     runs-on: ubuntu-latest
     steps:
-      - name: Check out code
+      - name: Checkout code
         uses: actions/checkout@v2
         with:
           # Full git history is needed to get a proper list of changed files within `super-linter`
@@ -18,9 +18,12 @@ jobs:
           # - run: npm install
           # - run: npm start
   
-      - name: Super-Linter
+      - name: Lint the code
         uses: github/super-linter@v4
         env:
           # VALIDATE_ALL_CODEBASE: false
           DEFAULT_BRANCH: main
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Deploy
+        run: echo "Deploying to heroku"
