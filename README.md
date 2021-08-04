@@ -26,3 +26,5 @@ Practicing basic RESTful web service CRUD operation on nodeJS using expressJS
         director
     }
 - Delete Movie      = delete    /api/movies/:id
+- Upload Picture    = post      /api/uploadpicture
+    - { id, picture }
