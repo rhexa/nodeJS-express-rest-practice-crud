@@ -1,4 +1,3 @@
-const { ifError } = require('assert');
 const fs = require('fs');
 let fileWritten = false;
 
