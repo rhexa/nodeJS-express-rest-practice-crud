@@ -1,7 +1,7 @@
 const express = require("express");
 const movies = require("../models/movie");
 const Movie = movies.Movie;
-const { uploadPicture } = require("../models/picture");
+const { uploadPicture, uploadTemp } = require("../models/picture");
 const router = express.Router({ mergeParams: true });
 
 // get all
@@ -59,42 +59,7 @@ router.delete("/:id", (req, res) => {
   res.json(movie);
 });
 
-// add new picture
-router.post("/uploadpicture", async (req, res) => {
-  try {
-    const value = req.body.id;
-    if (!req.files) {
-      console.log("file is required");
-
-      res.send({
-        status: 400,
-        message: "No file uploaded",
-      });
-    } else {
-      //Use the name of the input field (i.e. "avatar") to retrieve the uploaded file
-      let picture = req.files.picture;
-      console.log(req.files);
-
-      //Use the mv() method to place the file in upload directory (i.e. "uploads")
-      //   picture.mv("./public/uploads/" + picture.name);
-      console.log("file successfully uploaded");
-
-      //send response
-      res.send({
-        status: true,
-        message: "File is uploaded",
-        data: {
-          id: value,
-          name: picture.name,
-          tempFilePath: picture.tempFilePath,
-          mimetype: picture.mimetype,
-          size: picture.size,
-        },
-      });
-    }
-  } catch (err) {
-    res.status(500).send(err);
-  }
-});
+// add new picture (upload to tmp folder, to persist the picture, post the temporary path to add new movie.picture field)
+router.post("/uploadpicture", uploadTemp);
 
 module.exports = router;

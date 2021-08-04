@@ -1,7 +1,9 @@
 let movies = [
     {id: '1588323375416', title: 'Star Wars: Episode IX - The Rise of Skywalker', picture:{}, year: 2019, director: 'J.J. Abrams'},
     {id: '1588323390624', title: 'The Irishman', picture:{}, year: 2019, director: 'Martin Scorsese'},
-    {id: '1588323412643', title: 'Harry Potter and the Sorcerers Stone', picture:{}, year: 2001, director: 'Chris Columbus'}
+    {id: '1588323412643', title: 'Harry Potter and the Sorcerers Stone',
+        picture: {"name": "2016-kia-sportage.jpeg", "path": "http://localhost:3000/public/uploads/2016-kia-sportage.jpeg"},
+        year: 2001, director: 'Chris Columbus'}
   ];
 
 const Movie = class {

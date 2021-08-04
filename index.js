@@ -4,9 +4,12 @@ var path = require('path');
 const app = express();
 
 const port = 3000;
-const base = 'http://localhost';
 
-app.set('base', `${base}:${port}`);
+process.env.BASE_URL = process.env.BASE_URL || `http://localhost:${port}`
+
+// const base = 'http://localhost';
+
+// app.set('base', `${base}:${port}`);
 
 app.use('/api', router);
 app.use('/public/uploads',express.static(path.join(__dirname, 'public/uploads')));
