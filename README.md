@@ -10,7 +10,7 @@ Practicing basic RESTful web service CRUD operation on nodeJS using expressJS
         title,
         picture: {
             name,
-            path *temporary path from upload api*
+            path '*temporary path from upload api*'
         },
         year,
         director
