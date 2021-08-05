@@ -14,12 +14,12 @@ jobs:
           fetch-depth: 0
 
       # Lint the code
-      - name: Lint the code
-        uses: github/super-linter@v4
-        env:
-          VALIDATE_ALL_CODEBASE: false
-          DEFAULT_BRANCH: main
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # - name: Lint the code
+      #   uses: github/super-linter@v4
+      #   env:
+      #     VALIDATE_ALL_CODEBASE: false
+      #     DEFAULT_BRANCH: main
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       # Deploying to heroku
       - name: Deploying to heroku
