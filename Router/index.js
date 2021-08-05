@@ -1,10 +1,10 @@
-const router = require('express').Router();
-const middleware = require('./middleware');
+const router = require('express').Router()
+const middleware = require('./middleware')
 
 // middleware
-router.use(middleware);
+router.use(middleware)
 
 // movie
-router.use('/movies', require('./movie'));
+router.use('/movies', require('./movie'))
 
-module.exports = router;
+module.exports = router
