@@ -6,9 +6,6 @@ jobs:
   build:
     name: Build Test Deploy
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ~/app
     steps:
       # - name: Create app directory
       #   run: mkdir ~/app
