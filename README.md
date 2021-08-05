@@ -1,11 +1,13 @@
 # nodeJS-express-rest-practice-crud
+
 Practicing basic RESTful web service CRUD operation on nodeJS using expressJS
 
 ## Available API
+
 - Read All Movies   = get   /api/movies
 - Read Movie by ID  = get   /api/movies/:id
 - Add Movie         = post  /api/movies
-    - {
+  - {
         id,
         title,
         picture: {
@@ -16,7 +18,7 @@ Practicing basic RESTful web service CRUD operation on nodeJS using expressJS
         director
     }
 - Update Movie      = put   /api/movies/:id
-    - {
+  - {
         title,
         picture: {
             name,
@@ -27,4 +29,4 @@ Practicing basic RESTful web service CRUD operation on nodeJS using expressJS
     }
 - Delete Movie      = delete    /api/movies/:id
 - Upload Picture    = post      /api/uploadpicture
-    - { id, picture }
+  - { id, picture }
