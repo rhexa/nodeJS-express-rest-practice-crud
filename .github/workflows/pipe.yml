@@ -27,4 +27,4 @@ jobs:
 
           # Deploying to heroku
       - name: install heroku
-        run: snap install --classic heroku
+        run: sudo snap install --classic heroku
