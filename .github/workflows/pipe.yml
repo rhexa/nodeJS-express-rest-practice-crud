@@ -28,18 +28,22 @@ jobs:
       #     DEFAULT_BRANCH: main
       #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      # Which make
-      - name: Which make
-        run: which make
+      # ls current directory
+      - name: List current working directory
+        run: ls -la
+
+      # pwd
+      - name: pwd
+        run: pwd
 
       # Deploying to heroku
-      - name: Deploying to heroku
-        run: make deploy-heroku
-        env:
-          EMAIL: ${{ secrets.EMAIL }}
-          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+      # - name: Deploying to heroku
+      #   run: make deploy-heroku
+      #   env:
+      #     EMAIL: ${{ secrets.EMAIL }}
+      #     HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
 
       # Cleaning up the environment
-      - name: Cleaning up the environtment
-        if: ${{ always() }}
-        run: make cleanup
+      # - name: Cleaning up the environtment
+      #   if: ${{ always() }}
+      #   run: make cleanup
