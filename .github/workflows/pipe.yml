@@ -30,7 +30,7 @@ jobs:
 
       # pwd
       - name: pwd
-        run: pwd
+        run: "pwd"
 
       # ls current directory
       - name: List current working directory
