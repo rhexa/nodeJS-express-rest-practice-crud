@@ -21,9 +21,10 @@ jobs:
       - name: Lint the code
         uses: github/super-linter@v4
         env:
-          # VALIDATE_ALL_CODEBASE: false
+          VALIDATE_ALL_CODEBASE: false
           DEFAULT_BRANCH: main
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Deploy
-        run: echo "Deploying to heroku"
+          # Deploying to heroku
+      - name: install heroku
+        run: snap install --classic heroku
