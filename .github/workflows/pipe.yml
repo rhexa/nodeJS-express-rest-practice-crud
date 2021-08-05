@@ -28,13 +28,13 @@ jobs:
       #     DEFAULT_BRANCH: main
       #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      # ls current directory
-      - name: List current working directory
-        run: ls -la
-
       # pwd
       - name: pwd
         run: pwd
+
+      # ls current directory
+      - name: List current working directory
+        run: "ls -la ./"
 
       # Deploying to heroku
       # - name: Deploying to heroku
