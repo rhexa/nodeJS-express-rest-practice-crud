@@ -7,40 +7,29 @@ jobs:
     name: Build Test Deploy
     runs-on: ubuntu-latest
     steps:
-      # - name: Create app directory
-      #   run: mkdir ~/app
-      #   working-directory: ~/
-
       - name: Checkout code
         uses: actions/checkout@v2
-      #   with:
+        with:
           # Full git history is needed to get a proper list of changed files within `super-linter`
-          # fetch-depth: 0
+          fetch-depth: 0
 
       # Lint the code
-      # - name: Lint the code
-      #   uses: github/super-linter@v4
-      #   env:
-      #     VALIDATE_ALL_CODEBASE: false
-      #     DEFAULT_BRANCH: main
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      # pwd
-      - name: pwd
-        run: "pwd"
-
-      # ls current directory
-      - name: List current working directory
-        run: "ls -la ./"
+      - name: Lint the code
+        uses: github/super-linter@v4
+        env:
+          VALIDATE_ALL_CODEBASE: false
+          DEFAULT_BRANCH: main
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       # Deploying to heroku
-      # - name: Deploying to heroku
-      #   run: make deploy-heroku
-      #   env:
-      #     EMAIL: ${{ secrets.EMAIL }}
-      #     HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+      - name: Deploying to heroku
+        run: make deploy-heroku
+        env:
+          EMAIL: ${{ secrets.EMAIL }}
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+          APP_NAME: ${{ secrets.APP_NAME }}
 
       # Cleaning up the environment
-      # - name: Cleaning up the environtment
-      #   if: ${{ always() }}
-      #   run: make cleanup
+      - name: Cleaning up the environtment
+        if: ${{ always() }}
+        run: make cleanup

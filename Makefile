@@ -3,7 +3,8 @@ deploy-heroku:
 	sh ./cred.sh
 	git config --global user.name "rhexa"
 	git config --global user.email $EMAIL
-	heroku create
+	# heroku create "rhexa-$(date +'%d-%m-%H%M')" > text 
+	heroku git:remote -a $DEPLOY_URL
 	git push heroku main
 
 cleanup:
