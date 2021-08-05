@@ -10,9 +10,9 @@ jobs:
       run:
         working-directory: ~/app
     steps:
-      - name: Create app directory
-        run: mkdir ~/app
-        working-directory: ~/
+      # - name: Create app directory
+      #   run: mkdir ~/app
+      #   working-directory: ~/
 
       - name: Checkout code
         uses: actions/checkout@v2
