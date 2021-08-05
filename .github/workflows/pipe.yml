@@ -4,20 +4,23 @@ on:
     branches: [main]
 jobs:
   build:
-    name: Lint the code
+    name: Build Test Deploy
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ~/app
     steps:
+      - name: Create app directory
+        run: mkdir ~/app
+        working-directory: ~/
+
       - name: Checkout code
         uses: actions/checkout@v2
         with:
           # Full git history is needed to get a proper list of changed files within `super-linter`
           fetch-depth: 0
-          # - uses: actions/setup-node@v2
-          #   with:
-          #     node-version: '14'
-          # - run: npm install
-          # - run: npm start
-  
+
+      # Lint the code
       - name: Lint the code
         uses: github/super-linter@v4
         env:
@@ -25,6 +28,11 @@ jobs:
           DEFAULT_BRANCH: main
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-          # Deploying to heroku
-      - name: run heroku
-        run: heroku version
+      # Deploying to heroku
+      - name: Deploying to heroku
+        run: make deploy-heroku
+
+      # Cleaning up the environment
+      - name: Cleaning up the environtment
+        if: ${{ always() }}
+        run: make cleanup
