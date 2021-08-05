@@ -26,5 +26,5 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
           # Deploying to heroku
-      - name: install heroku
-        run: sudo snap install --classic heroku
+      - name: run heroku
+        run: heroku version
