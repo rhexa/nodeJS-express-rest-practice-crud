@@ -6,7 +6,7 @@ deploy-heroku:
 	git config --global user.email "${EMAIL}"
 	# heroku create "rhexa-$(date +'%d-%m-%H%M')" > text
 	heroku git:remote --app "${APP_NAME}" 
-	git remote
+	git branch -r
 	cat ~/.netrc
 	git push heroku main
 
