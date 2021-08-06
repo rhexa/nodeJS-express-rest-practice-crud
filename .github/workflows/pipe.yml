@@ -25,9 +25,6 @@ jobs:
     environment:
       name: Staging
       url: ${{ env.DEPLOYED_URL }}
-      EMAIL: ${{ secrets.EMAIL }}
-      HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-      APP_NAME: ${{ secrets.APP_NAME }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -39,12 +36,16 @@ jobs:
       - name: Deploying to heroku
         run: make deploy-heroku
         #  EMAIL=${{ secrets.EMAIL }} HEROKU_API_KEY=${{ secrets.HEROKU_API_KEY }} APP_NAME=${{ secrets.APP_NAME }}
-      #  env:
-      #    EMAIL: ${{ secrets.EMAIL }}
-      #    HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-      #    APP_NAME: ${{ secrets.APP_NAME }}
+        env:
+          EMAIL: ${{ secrets.EMAIL }}
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+          APP_NAME: ${{ secrets.APP_NAME }}
 
       # Cleaning up the environment
       - name: Cleaning up the environtment
         if: ${{ always() }}
         run: make cleanup
+        env:
+          EMAIL: ${{ secrets.EMAIL }}
+          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+          APP_NAME: ${{ secrets.APP_NAME }}
