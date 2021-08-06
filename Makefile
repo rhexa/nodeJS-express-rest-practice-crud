@@ -13,5 +13,5 @@ deploy-heroku:
 	git push -u heroku main
 
 cleanup:
-	heroku apps:destroy --app "${APP_NAME}" --confirm "${APP_NAME}"
+	# heroku apps:destroy --app "${APP_NAME}" --confirm "${APP_NAME}"
 	rm ~/.netrc
