@@ -33,7 +33,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   DeployStage:
-    needs: [Build]
+    needs: [Build, Test]
     name: Deploy Staging
     runs-on: ubuntu-latest
     environment:
