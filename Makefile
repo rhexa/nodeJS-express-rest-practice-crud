@@ -6,6 +6,7 @@ deploy-heroku:
 	# heroku create "rhexa-$(date +'%d-%m-%H%M')" > text
 	heroku git:remote --app "${APP_NAME}" 
 	git branch -ra
+	git checkout -b m/heroku --track heroku main
 	git push -u heroku main
 
 cleanup:
