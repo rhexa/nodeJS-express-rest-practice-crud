@@ -3,23 +3,31 @@ on:
   pull_request:
     branches: [main]
 jobs:
-  build:
-    name: Build Test Deploy
+  Build:
+    name: Build Test
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-        with:
-          # Full git history is needed to get a proper list of changed files within `super-linter`
-          fetch-depth: 0
 
       # Lint the code
-      # - name: Lint the code
-      #   uses: github/super-linter@v4
-      #   env:
-      #     VALIDATE_ALL_CODEBASE: false
-      #     DEFAULT_BRANCH: main
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Lint the code
+        uses: github/super-linter@v4
+        env:
+          VALIDATE_ALL_CODEBASE: false
+          DEFAULT_BRANCH: main
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  DeployStage:
+    needs: [Build]
+    name: Deploy Staging
+    runs-on: ubuntu-latest
+    environtment:
+      name: Staging
+      url: ${{ env.DEPLOYED_URL }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
 
       # Deploying to heroku
       - name: Deploying to heroku
