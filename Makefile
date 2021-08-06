@@ -8,7 +8,7 @@ deploy-heroku:
 	heroku git:remote --app "${APP_NAME}" 
 	git branch -r
 	cat ~/.netrc
-	git push heroku main
+	git push heroku main -f
 
 cleanup:
 	rm ~/.netrc
