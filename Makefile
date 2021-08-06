@@ -9,7 +9,7 @@ deploy-heroku:
 	git status
 	git restore .
 	# git checkout -b m/heroku --track heroku/main
-	git push -u heroku HEAD:master
+	git push -u heroku refs/heads/main
 
 cleanup:
 	rm ~/.netrc
