@@ -19,4 +19,5 @@ config:
 	sh ./cred.sh
 
 cleanup:
+	# heroku apps:destroy --app "${APP_NAME}" --confirm "${APP_NAME}"
 	rm ~/.netrc
