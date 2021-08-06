@@ -22,7 +22,7 @@ jobs:
     needs: [Build]
     name: Deploy Staging
     runs-on: ubuntu-latest
-    environtments:
+    environment:
       name: Staging
       url: ${{ env.DEPLOYED_URL }}
     steps:
