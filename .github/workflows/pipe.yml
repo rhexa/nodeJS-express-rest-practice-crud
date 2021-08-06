@@ -25,13 +25,20 @@ jobs:
     environment:
       name: Staging
       url: ${{ env.DEPLOYED_URL }}
+      EMAIL: ${{ secrets.EMAIL }}
+      HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+      APP_NAME: ${{ secrets.APP_NAME }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+        with:
+          # Full git history is needed to get a proper list of changed files within `super-linter`
+          fetch-depth: 0
 
       # Deploying to heroku
       - name: Deploying to heroku
-        run: make deploy-heroku EMAIL=${{ secrets.EMAIL }} HEROKU_API_KEY=${{ secrets.HEROKU_API_KEY }} APP_NAME=${{ secrets.APP_NAME }}
+        run: make deploy-heroku
+        #  EMAIL=${{ secrets.EMAIL }} HEROKU_API_KEY=${{ secrets.HEROKU_API_KEY }} APP_NAME=${{ secrets.APP_NAME }}
       #  env:
       #    EMAIL: ${{ secrets.EMAIL }}
       #    HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
