@@ -8,7 +8,7 @@ deploy-heroku:
 	git branch -ra
 	git restore .
 	git status
-	git checkout -b main --track heroku/main
+	git checkout -b main
 	git push -u heroku main
 
 cleanup:
