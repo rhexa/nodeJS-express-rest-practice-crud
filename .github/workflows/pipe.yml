@@ -23,11 +23,11 @@ jobs:
 
       # Deploying to heroku
       - name: Deploying to heroku
-        run: make deploy-heroku
-        env:
-          EMAIL: ${{ secrets.EMAIL }}
-          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-          APP_NAME: ${{ secrets.APP_NAME }}
+        run: make deploy-heroku EMAIL=${{ secrets.EMAIL }} HEROKU_API_KEY=${{ secrets.HEROKU_API_KEY }} APP_NAME=${{ secrets.APP_NAME }}
+      #  env:
+      #    EMAIL: ${{ secrets.EMAIL }}
+      #    HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+      #    APP_NAME: ${{ secrets.APP_NAME }}
 
       # Cleaning up the environment
       - name: Cleaning up the environtment
