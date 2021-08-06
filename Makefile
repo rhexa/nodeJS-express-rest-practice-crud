@@ -3,13 +3,15 @@ deploy-heroku:
 	sh ./cred.sh
 	git config --global user.name "rhexa"
 	git config --global user.email "${EMAIL}"
+	heroku create apps:create --app "${APP_NAME}" --region eu | echo "DEPLOYED_URL=$(awk {'print $1'})" >> GITHUB_ENV
 	# heroku create "rhexa-$(date +'%d-%m-%H%M')" > text
-	heroku git:remote --app "${APP_NAME}" 
-	git branch -ra
+	# heroku git:remote --app "${APP_NAME}" 
+	# git branch -ra
 	git restore .
-	git status
+	# git status
 	git checkout -b main
 	git push -u heroku main
 
 cleanup:
+	# heroku apps:destroy --app "${APP_NAME}" --confirm "${APP_NAME}"
 	rm ~/.netrc
