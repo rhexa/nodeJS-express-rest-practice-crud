@@ -3,7 +3,7 @@ const router = require('./Router')
 const path = require('path')
 const app = express()
 
-const port = 3000
+const port = process.env.PORT || 3000
 
 process.env.BASE_URL = process.env.BASE_URL || `http://localhost:${port}`
 

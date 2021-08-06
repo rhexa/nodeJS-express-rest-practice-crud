@@ -4,7 +4,7 @@ on:
     branches: [main]
 jobs:
   build:
-    name: Lint the code
+    name: Build Test Deploy
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -12,18 +12,24 @@ jobs:
         with:
           # Full git history is needed to get a proper list of changed files within `super-linter`
           fetch-depth: 0
-          # - uses: actions/setup-node@v2
-          #   with:
-          #     node-version: '14'
-          # - run: npm install
-          # - run: npm start
-  
-      - name: Lint the code
-        uses: github/super-linter@v4
-        env:
-          # VALIDATE_ALL_CODEBASE: false
-          DEFAULT_BRANCH: main
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Deploy
-        run: echo "Deploying to heroku"
+      # Lint the code
+      # - name: Lint the code
+      #   uses: github/super-linter@v4
+      #   env:
+      #     VALIDATE_ALL_CODEBASE: false
+      #     DEFAULT_BRANCH: main
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # Deploying to heroku
+      - name: Deploying to heroku
+        run: make deploy-heroku EMAIL=${{ secrets.EMAIL }} HEROKU_API_KEY=${{ secrets.HEROKU_API_KEY }} APP_NAME=${{ secrets.APP_NAME }}
+      #  env:
+      #    EMAIL: ${{ secrets.EMAIL }}
+      #    HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+      #    APP_NAME: ${{ secrets.APP_NAME }}
+
+      # Cleaning up the environment
+      - name: Cleaning up the environtment
+        if: ${{ always() }}
+        run: make cleanup
