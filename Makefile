@@ -7,8 +7,9 @@ deploy-heroku:
 	heroku git:remote --app "${APP_NAME}" 
 	git branch -ra
 	git status
-	git checkout -b m/heroku --track heroku/main
-	git push -u heroku main
+	git restore .
+	# git checkout -b m/heroku --track heroku/main
+	git push -u heroku HEAD:master
 
 cleanup:
 	rm ~/.netrc
