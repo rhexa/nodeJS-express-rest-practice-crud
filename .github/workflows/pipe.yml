@@ -6,10 +6,13 @@ jobs:
   Build:
     name: Build
     runs-on: ubuntu-latest
+    outputs:
+      deployUrl: ${{ steps.set-url.outputs.deployUrl }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
       - name: Building the apps
+        id: set-url
         run: make build
         env:
           EMAIL: ${{ secrets.EMAIL }}
@@ -38,7 +41,7 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: Staging
-      url: ${{ env.DEPLOYED_URL }}
+      url: ${{ needs.Build.outputs.deployUrl }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
