@@ -1,0 +1,20 @@
+name: build
+on:
+  push: 
+    branches: [feature/v2/1]
+jobs:
+  job1:
+    runs-on: ubuntu-latest
+    outputs:
+      deployUrl: ${{ steps.set-url.outputs.deployUrl }}
+    steps:
+      - id: set-url
+        run: echo "::set-output name=deployUrl::https://localhost.com"
+  job2:
+    needs: job1
+    runs-on: ubuntu-latest
+    environment: 
+      name: Development 
+      url: ${{ needs.job1.outputs.deployUrl }}
+    steps:
+      - run: echo ${{ needs.job1.outputs.deployUrl }}
