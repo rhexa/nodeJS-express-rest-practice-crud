@@ -1,6 +1,6 @@
 build:	config
 	heroku apps:destroy --app "${APP_NAME}" --confirm "${APP_NAME}" && echo 1 || echo 0
-	heroku create apps:create --app "${APP_NAME}" --region eu | awk {'print ::set-output name=deployUrl::$1'}
+	heroku create apps:create --app "${APP_NAME}" --region eu | awk {'print "::set-output name=deployUrl::"$1'}
 	# echo "::set-output name=deployUrl::$(heroku create apps:create --app "${APP_NAME}" --region eu | awk {'print $1'})"
 	# heroku create apps:create --app "${APP_NAME}" --region eu | echo "DEPLOYED_URL=$(awk {'print $1'})" >> GITHUB_ENV
 
