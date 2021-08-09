@@ -16,9 +16,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
       - name: Building the apps
+        id: set-url
         run: make build
-      - id: set-url
-        run: echo "::set-output name=deployUrl::$DEPLOY_URL"
+      #   run: echo "::set-output name=deployUrl::$DEPLOY_URL"
 
   Test:
     needs: [Build]
