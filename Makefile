@@ -4,7 +4,7 @@ build:	config
 	# ifeq ($(app_exists), 1)
 	# 	heroku apps:destroy --app "${APP_NAME}" --confirm "${APP_NAME}"
 	# endif
-	heroku apps:destroy --app "${APP_NAME}" --confirm "${APP_NAME}" && echo 1 || 0
+	heroku apps:destroy --app "${APP_NAME}" --confirm "${APP_NAME}" && echo 1 || echo 0
 	heroku create apps:create --app "${APP_NAME}" --region eu | echo "::set-output name=deployUrl::$(awk {'print $1'})"
 	# heroku create apps:create --app "${APP_NAME}" --region eu | echo "DEPLOYED_URL=$(awk {'print $1'})" >> GITHUB_ENV
 
