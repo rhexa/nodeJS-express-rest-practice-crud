@@ -18,6 +18,8 @@ jobs:
       - name: Building the apps
         id: set-url
         run: make build
+      - name: echo
+        run: echo ${{ env.DEPLOYED_URL }}
       #   run: echo "::set-output name=deployUrl::$DEPLOY_URL"
 
   Test:
