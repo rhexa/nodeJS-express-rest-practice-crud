@@ -2,9 +2,31 @@ name: github-actions-pipeline
 on: 
   pull_request:
     branches: [main]
+env: 
+  APP_NAME: rhexa-stage-${{ github.head_ref }}
+  EMAIL: ${{ secrets.EMAIL }}
+  HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
 jobs:
   Build:
-    name: Build Test
+    name: Build
+    runs-on: ubuntu-latest
+    outputs:
+      deployUrl: ${{ steps.set-url.outputs.deployUrl }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Building the apps
+        run: make build
+      - name: echo
+        id: set-url
+        run: |
+          URL=$(cat url.txt)  
+          echo "::set-output name=deployUrl::$URL"
+      #   run: echo "::set-output name=deployUrl::$DEPLOY_URL"
+
+  Test:
+    needs: [Build]
+    name: Test
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -19,12 +41,12 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   DeployStage:
-    needs: [Build]
+    needs: [Build, Test]
     name: Deploy Staging
     runs-on: ubuntu-latest
     environment:
       name: Staging
-      url: ${{ env.DEPLOYED_URL }}
+      url: ${{ needs.Build.outputs.deployUrl }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -35,17 +57,8 @@ jobs:
       # Deploying to heroku
       - name: Deploying to heroku
         run: make deploy-heroku
-        #  EMAIL=${{ secrets.EMAIL }} HEROKU_API_KEY=${{ secrets.HEROKU_API_KEY }} APP_NAME=${{ secrets.APP_NAME }}
-        env:
-          EMAIL: ${{ secrets.EMAIL }}
-          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-          APP_NAME: ${{ secrets.APP_NAME }}
 
       # Cleaning up the environment
       - name: Cleaning up the environtment
         if: ${{ always() }}
         run: make cleanup
-        env:
-          EMAIL: ${{ secrets.EMAIL }}
-          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-          APP_NAME: ${{ secrets.APP_NAME }}
