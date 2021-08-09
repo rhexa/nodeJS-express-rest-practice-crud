@@ -2,6 +2,10 @@ name: github-actions-pipeline
 on: 
   pull_request:
     branches: [main]
+env: 
+  APP_NAME: rhexa-stage-${{ github.head_ref }}
+  EMAIL: ${{ secrets.EMAIL }}
+  HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
 jobs:
   Build:
     name: Build
@@ -13,11 +17,7 @@ jobs:
         uses: actions/checkout@v2
       - name: Building the apps
         id: set-url
-        run: make build
-        env:
-          EMAIL: ${{ secrets.EMAIL }}
-          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-          APP_NAME: ${{ secrets.APP_NAME }}
+        run: make build          
 
   Test:
     needs: [Build]
@@ -52,16 +52,8 @@ jobs:
       # Deploying to heroku
       - name: Deploying to heroku
         run: make deploy-heroku
-        env:
-          EMAIL: ${{ secrets.EMAIL }}
-          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-          APP_NAME: ${{ secrets.APP_NAME }}
 
       # Cleaning up the environment
       - name: Cleaning up the environtment
         if: ${{ always() }}
         run: make cleanup
-        env:
-          EMAIL: ${{ secrets.EMAIL }}
-          HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-          APP_NAME: ${{ secrets.APP_NAME }}
