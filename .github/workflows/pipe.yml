@@ -1,6 +1,6 @@
 name: github-actions-pipeline
 on: 
-  pull_request:
+  push:
     branches: [main]
 env: 
   # APP_NAME: rhexa-movieapp-${{ github.head_ref }}
